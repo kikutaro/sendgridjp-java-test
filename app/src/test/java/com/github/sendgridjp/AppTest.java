@@ -30,10 +30,11 @@ public class AppTest
     }
 
     @Test
-    public void メール送信テスト()
+    public void メール送信テスト() throws IOException
     {
         Dotenv dotenv = Dotenv.load();
         String apiKey = dotenv.get("API_KEY");
+        System.out.println(apiKey);
         List<Email> tos = Arrays.asList(dotenv.get("TOS").split((","))).stream().map(to -> new Email(to)).collect(Collectors.toList());
         Email from = new Email(dotenv.get("FROM"), "送信者");
 
@@ -49,7 +50,7 @@ public class AppTest
         msg.addHeader("X-Sent-Using", "SendGrid-API");
         
         Attachments attachment = new Attachments();
-        attachment.setContent(Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get("src/main/resources/gif.gif"))));
+        attachment.setContent(Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get("src/test/resources/gif.gif"))));
         attachment.setFilename("owl.gif");
         attachment.setType("image/gif");
         attachment.setDisposition("attachment");
@@ -85,6 +86,8 @@ public class AppTest
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
         System.out.println(response.getHeaders());
+
+
 
         assertTrue(response.getStatusCode() == 200);
     }
