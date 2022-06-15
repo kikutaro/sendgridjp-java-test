@@ -13,9 +13,6 @@ jobs:
             echo "TOS" >> app/src/test/resources/.env
             echo "FROM" >> app/src/test/resources/.env
       - run:
-          name: Build
-          command: mvn Build
-      - run:
           name: Unit test
           command: mvn test
 
