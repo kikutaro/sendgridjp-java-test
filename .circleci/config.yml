@@ -6,6 +6,12 @@ jobs:
     steps:
       - checkout
       - run: java --version
+      - run:
+          name: Setup env
+          command: |
+            echo "API_KEY=$SENDGRID_API_KEY" >> app/src/test/resources/.env
+            echo "TOS" >> app/src/test/resources/.env
+            echo "FROM" >> app/src/test/resources/.env
 
 workflows:
   version: 2
