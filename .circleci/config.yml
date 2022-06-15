@@ -1,0 +1,24 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/openjdk:17.0.3
+    steps:
+      - checkout
+      - run: java --version
+
+workflows:
+  version: 2
+  normal_deploy_workflow:
+    jobs:
+      - test
+  monthly_workflow:
+    triggers:
+      - schedule:
+          cron: "0 0 2 * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - test
