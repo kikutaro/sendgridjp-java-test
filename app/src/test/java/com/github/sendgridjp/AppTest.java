@@ -13,6 +13,8 @@ import com.sendgrid.*;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.*;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 /**
  * Unit test for simple App.
  */
